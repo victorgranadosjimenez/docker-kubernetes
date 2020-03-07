@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+#metadatas pra hacer queries con la bd de kubernetes
+metadata:
+  name: api-hello-deployment
+  labels:
+    app: api-hello
+    #queremos 10 replicas de ese pod
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      #todo lo que tenga esta label lo va a incluir en el deployment
+      app: api-hello
+  template:
+    metadata:
+      labels:
+        app: api-hello
+    spec:
+      containers:
+      - name: api-hello
+        image: christianhxc/api-hello:1.0
+        ports:
+        - containerPort: 8080
